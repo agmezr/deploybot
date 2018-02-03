@@ -14,6 +14,7 @@ def timestamp():
 
 def url_get(url, code, log):
     ''' HTTP GET over url and validate return code is the expected '''
+
     try:
         request = get(url)
         status_code = request.status_code
