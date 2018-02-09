@@ -17,7 +17,7 @@ log = {
 
 # slack url for incoming webhooks
 slack = {
-    'notify': True
+    'notify': True,
     'url': 'https://hooks.slack.com/services/[slack url]'
 }
 

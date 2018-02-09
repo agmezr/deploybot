@@ -15,6 +15,7 @@ if __name__ == '__main__':
     service = config.service
     notify = config.slack['notify']
     slack_url = config.slack['url']
+    deploy_path = config.deploy_path
     can_deploy = False
     last_hash = None
     options = None
@@ -75,7 +76,7 @@ if __name__ == '__main__':
                 log
             )
             command = ' '.join([
-                config.['deploy_script'],
+                config['deploy_script'],
                 options
             ])
             log.debug('Executing: {}'.format(command))
