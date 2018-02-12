@@ -14,11 +14,11 @@ if __name__ == '__main__':
     environment = config.environment.lower()
     service = config.service
     notify = config.slack['notify']
-    slack_url = config.slack['url']
+    url = config.slack['url']
     deploy_path = config.deploy_path
     can_deploy = False
     last_hash = None
-    options = None
+    options = ''
 
     # git pull
     command = 'cd {}; git pull origin master'.format(deploy_path)
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                     with open( '.indeploy', 'w') as f:
                         f.write(git_hash)
             except (IOError, Exception) as error_:
-                log.error('Failed to open lock file')
+                log.error('Failed to open lock file %s', error_)
         elif (typo[0] and (git_hash not in last_hash)):
             notify_slack(
                 url,
@@ -76,7 +76,7 @@ if __name__ == '__main__':
                 log
             )
             command = ' '.join([
-                config['deploy_script'],
+                config.deploy_script,
                 options
             ])
             log.debug('Executing: {}'.format(command))
@@ -120,4 +120,7 @@ if __name__ == '__main__':
                     notify,
                     log
                 )
+        # delete hash on lock file
+        with open( '.indeploy', 'w') as f:
+            f.write('')
     log.info('Terminating execution')
