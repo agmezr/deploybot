@@ -18,7 +18,7 @@ if __name__ == '__main__':
     deploy_path = config.deploy_path
     can_deploy = False
     last_hash = None
-    options = ''
+    options = None
 
     # git pull
     command = 'cd {}; git pull origin master'.format(deploy_path)
@@ -120,7 +120,4 @@ if __name__ == '__main__':
                     notify,
                     log
                 )
-        # delete hash on lock file
-        with open( '.indeploy', 'w') as f:
-            f.write('')
     log.info('Terminating execution')
