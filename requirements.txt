@@ -1,2 +1,2 @@
 ansible==7.0.0
-requests==2.18.1
+requests==2.31.0
